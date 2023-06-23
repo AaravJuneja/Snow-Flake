@@ -4,11 +4,11 @@ import time
 
 screen = turtle.Screen()
 screen.setup(800, 600)
-screen.bgcolor("midnight blue")
+screen.bgcolor("black")
 screen.title("Creative Christmas Snowstorm")
 
 snowflakes = []
-colors = ["white", "light cyan", "light yellow", "light green", "light blue", "light pink"]
+green_colors = ["green", "dark green", "lime green", "forest green", "sea green", "chartreuse"]
 for _ in range(50):
     snowflake = turtle.Turtle()
     snowflake.shape("circle")
@@ -58,11 +58,11 @@ fireworks = []
 for _ in range(20):
     firework = turtle.Turtle()
     firework.shape("circle")
-    firework.color(random.choice(colors))
+    firework.color(random.choice(green_colors))
     firework.speed(0)
     firework.penup()
     firework.goto(random.randint(-400, 400), random.randint(-200, 200))
-    firework.attributes = {"dy": random.uniform(3, 6), "gravity": random.uniform(0.1, 0.2)}
+    firework.attributes = {"dy": random.uniform(3, 6), "gravity": random.uniform(0.1, 0.2)} # type: ignore
     fireworks.append(firework)
 
 
@@ -70,34 +70,31 @@ def swirl(turtle, angle):
     turtle.right(angle)
 
 
-try:
-    while True:
-        for snowflake in snowflakes:
-            snowflake.color(random.choice(colors))
-            snowflake.sety(snowflake.ycor() - random.uniform(1, 3))
+while True:
+    for snowflake in snowflakes:
+        snowflake.color(random.choice(green_colors))
+        snowflake.sety(snowflake.ycor() - random.uniform(1, 3))
 
-            if snowflake.ycor() < -350:
-                snowflake.goto(random.randint(-400, 400), 300)
+        if snowflake.ycor() < -350:
+            snowflake.goto(random.randint(-400, 400), 300)
 
-            if snowflake.xcor() < -400:
-                snowflake.goto(400, snowflake.ycor())
+        if snowflake.xcor() < -400:
+            snowflake.goto(400, snowflake.ycor())
 
-            if snowflake.xcor() > 400:
-                snowflake.goto(-400, snowflake.ycor())
+        if snowflake.xcor() > 400:
+            snowflake.goto(-400, snowflake.ycor())
 
-            swirl(snowflake, random.randint(-5, 5))
+        swirl(snowflake, random.randint(-5, 5))
 
-        for firework in fireworks:
-            firework.sety(firework.ycor() - firework.attributes["dy"])
-            firework.attributes["dy"] -= firework.attributes["gravity"]
+    for firework in fireworks:
+        firework.sety(firework.ycor() - firework.attributes["dy"])
+        firework.attributes["dy"] -= firework.attributes["gravity"]
 
-            if firework.ycor() < -300:
-                firework.goto(random.randint(-400, 400), random.randint(-200, 200))
-                firework.attributes["dy"] = random.uniform(3, 6)
-                firework.attributes["gravity"] = random.uniform(0.1, 0.2)
+        if firework.ycor() < -300:
+            firework.goto(random.randint(-400, 400), random.randint(-200, 200))
+            firework.attributes["dy"] = random.uniform(3, 6)
+            firework.attributes["gravity"] = random.uniform(0.1, 0.2)
 
-        time.sleep(0.01)
-except turtle.Terminator:
-    pass
+    time.sleep(0.01)
 
 turtle.done()
