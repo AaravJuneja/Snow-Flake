@@ -71,9 +71,12 @@ def swirl(turtle, angle):
 
 screen.tracer(0)
 
+turtle_speed = 10
+
 while True:
     for snowflake in snowflakes:
         snowflake.color(random.choice(green_colors))
+        snowflake.speed(turtle_speed)
         snowflake.sety(snowflake.ycor() - random.uniform(1, 3))
 
         if snowflake.ycor() < -350:
