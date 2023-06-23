@@ -1,11 +1,11 @@
 import turtle
 import random
-import time
 
 screen = turtle.Screen()
 screen.setup(800, 600)
 screen.bgcolor("black")
 screen.title("Creative Christmas Snowstorm")
+screen.tracer(0)
 
 snowflakes = []
 green_colors = ["green", "dark green", "lime green", "forest green", "sea green", "chartreuse"]
@@ -92,9 +92,6 @@ while True:
 
         if firework.ycor() < -300:
             firework.goto(random.randint(-400, 400), random.randint(-200, 200))
-            firework.attributes["dy"] = random.uniform(3, 6)
-            firework.attributes["gravity"] = random.uniform(0.1, 0.2)
+            firework.attributes = {"dy": random.uniform(3, 6), "gravity": random.uniform(0.1, 0.2)}
 
-    time.sleep(0.01)
-
-turtle.done()
+    screen.update()
